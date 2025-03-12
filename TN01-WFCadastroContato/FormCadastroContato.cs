@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TN01_WFCadastroContato
 {
@@ -97,7 +98,12 @@ namespace TN01_WFCadastroContato
 
             }
 
-            MessageBox.Show("Cadastro realizado com sucesso!", "Info1", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string mensagem = "Cadastro realizado com sucesso!" + "\n" + "Nome:" + Nome + "\n" +
+                "Sobrenome: " + Sobrenome + "\n" +
+                "Telefone: " + DddTelefone + "\n" +
+                "Tipo de Telefone: " + TipoTelefone + "\n" +
+                "Email: " + Email + "\n";
+            MessageBox.Show(mensagem, "Cadastro Concluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LimparFormulario();
         }
