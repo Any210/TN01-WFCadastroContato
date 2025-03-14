@@ -186,6 +186,7 @@
             btnVoltar.Text = "Voltar";
             btnVoltar.TextAlign = ContentAlignment.MiddleRight;
             btnVoltar.UseVisualStyleBackColor = true;
+            btnVoltar.Click += btnVoltar_Click;
             // 
             // btnSalvar
             // 
@@ -218,7 +219,11 @@
             Controls.Add(lblTelefone);
             Controls.Add(lblSobrenome);
             Controls.Add(lblNome);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormCadastroContato";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastrar Contato";
             gbxTipoTelefone.ResumeLayout(false);
             gbxTipoTelefone.PerformLayout();

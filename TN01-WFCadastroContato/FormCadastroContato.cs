@@ -43,7 +43,7 @@ namespace TN01_WFCadastroContato
             {
                 Nome = txtNome.Text;
             }
-                string Sobrenome = txtSobrenome.Text;
+            string Sobrenome = txtSobrenome.Text;
 
             if (Sobrenome == "")
             {
@@ -65,19 +65,19 @@ namespace TN01_WFCadastroContato
             {
                 Nome = txtNome.Text;
             }
-            string TipoTelefone;
+            ETipoTelefone tipoTelefone;
 
             if (rdbPessoal.Checked)
             {
-                TipoTelefone = "Pessoal";
+                tipoTelefone = ETipoTelefone.Pessoal;
             }
             else if (rdbComercial.Checked)
             {
-                TipoTelefone = "Comercial";
+                tipoTelefone = ETipoTelefone.Comercial;
             }
             else if (rdbRecado.Checked)
             {
-                TipoTelefone = "Recado";
+                tipoTelefone = ETipoTelefone.Recado;
             }
             else
             {
@@ -98,14 +98,32 @@ namespace TN01_WFCadastroContato
 
             }
 
+            Contato c1 = new Contato();
+            c1.Nome = txtNome.Text;
+            c1.Sobrenome = txtSobrenome.Text;
+            c1.Email = txtEmail.Text;
+            c1.Codigo = 0;
+            c1.TipoTelefone = tipoTelefone;
+            c1.Ddd = mkdTelefone.Text.Substring(0, 2);
+            c1.Telefone = mkdTelefone.Text.Substring(2);
+
+            Contato.ListaContatos.Add(c1);
+
+
+
             string mensagem = "Cadastro realizado com sucesso!" + "\n" + "Nome:" + Nome + "\n" +
                 "Sobrenome: " + Sobrenome + "\n" +
                 "Telefone: " + DddTelefone + "\n" +
-                "Tipo de Telefone: " + TipoTelefone + "\n" +
+                "Tipo de Telefone: " + tipoTelefone + "\n" +
                 "Email: " + Email + "\n";
             MessageBox.Show(mensagem, "Cadastro Concluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LimparFormulario();
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
