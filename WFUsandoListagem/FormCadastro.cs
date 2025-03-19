@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WFUsandoListagem
 {
@@ -18,45 +17,45 @@ namespace WFUsandoListagem
             InitializeComponent();
         }
 
+        public void Erro(string mensagem)
+        {
+            MessageBox.Show(mensagem, "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            string Login = txtLogin.Text;
-
-            if (Login == "")
+            if (string.IsNullOrEmpty(txtLogin.Text))
             {
-                MessageBox.Show("Informe o seu login!!");
+                Erro("O login não podem ser vazio!");
                 return;
             }
-            else
-            {
-                Login = txtLogin.Text;
-            }
-            string Senha = txtCSenha.Text;
 
-            if (Senha == "")
+            if (string.IsNullOrEmpty(txtSenha.Text))
             {
-                MessageBox.Show("Informe a sua senha!!");
+                Erro("As Senhas não podem ser vazias!");
                 return;
             }
-            else
-            {
-                Senha = txtCSenha.Text;
-            }
-            string ConfirmarSenha = txtCSenha.Text;
 
-            if (ConfirmarSenha != Senha)
+            if (txtSenha.Text != txtCSenha.Text)
             {
-                MessageBox.Show("Senha não compativel!!");
+                Erro("As Senhas devem ser iguais!");
                 return;
             }
-            else
-            {
-                ConfirmarSenha = txtCSenha.Text;
-            }
 
-            
-            MessageBox.Show( "Cadastro Concluido!!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Usuario novoUs = new Usuario();
+            novoUs.Codigo = Usuario.ListaUsuarios.Count + 1;
+            novoUs.Login = txtLogin.Text;
+            novoUs.Senha = txtSenha.Text;
+            novoUs.DataCadastro = DateTime.Now;
 
+            Usuario.ListaUsuarios.Add(novoUs);
+
+            Close();
+
+            FormListagem form = new FormListagem();
+            form.ShowDialog();
 
         }
     }

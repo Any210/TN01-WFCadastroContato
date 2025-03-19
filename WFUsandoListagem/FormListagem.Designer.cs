@@ -35,9 +35,9 @@
             // dgvListagem
             // 
             dgvListagem.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListagem.Location = new Point(24, 69);
+            dgvListagem.Location = new Point(12, 12);
             dgvListagem.Name = "dgvListagem";
-            dgvListagem.Size = new Size(764, 369);
+            dgvListagem.Size = new Size(776, 426);
             dgvListagem.TabIndex = 0;
             // 
             // FormListagem

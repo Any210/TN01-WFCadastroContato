@@ -5,46 +5,62 @@ namespace WFUsandoListagem
         public FormLogin()
         {
             InitializeComponent();
-            CarregarLista();
         }
 
-        private void CarregarLista()
+        private void FormLogin_Load(object sender, EventArgs e)
         {
-            Usuario.ListaUsuarios.Add(new Usuario { Codigo = 1000, Login = "user", Senha = "123456", DataCadastro = new DateTime(2024, 01, 10) });
-            
+            Usuario us = new Usuario();
+            us.Codigo = 1;
+            us.Login = "user";
+            us.Senha = "123456";
+            us.DataCadastro =
+                Convert.ToDateTime("10/01/2025 18:30");
 
+            Usuario.ListaUsuarios.Add(us);
+        }
+
+        public void Erro(string mensagem)
+        {
+            MessageBox.Show(mensagem, "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
         }
 
         private void btnAcessar_Click(object sender, EventArgs e)
         {
-            foreach (Usuario usuario in Usuario.ListaUsuarios)
+            if (string.IsNullOrEmpty(txtLogin.Text))
             {
-                if (usuario.Login == txtLogin.Text && usuario.Senha == txtSenha.Text)
-                {
-                    FormMain form = new FormMain();
-                    form.ShowDialog();
-                    return;
-                }
+                Erro("O Campo Login não pode estar vazio!");
+                return;
             }
-            MessageBox.Show("Usuário ou Senha Incorretos!!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (string.IsNullOrEmpty(txtSenha.Text))
+            {
+                Erro("O Campo Senha não pode estar vazio!");
+                return;
+            }
+
+            foreach (Usuario u in Usuario.ListaUsuarios)
+            {
+                if (u.Login == txtLogin.Text)
+                {
+                    if (u.Senha == txtSenha.Text)
+                    {
+                        FormMain form = new FormMain();
+                        form.ShowDialog();
+
+                        this.txtLogin.Clear();
+                        this.txtSenha.Clear();
+
+                        return;
+                    }
+                }
+
+            }
+
+            Erro("Usuario e Senha não se encontra na Base!");
             return;
         }
-        private void txtLogin_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtSenha.Focus();
 
-            }
-        }
 
-        private void txtSenha_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnAcessar_Click(sender, e);
-
-            }
-        }
     }
 }

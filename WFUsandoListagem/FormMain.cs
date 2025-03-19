@@ -17,22 +17,23 @@ namespace WFUsandoListagem
             InitializeComponent();
         }
 
-
         private void mnsCadastrar_Click(object sender, EventArgs e)
         {
             FormCadastro form = new FormCadastro();
             form.ShowDialog();
         }
 
-        private void mnsSair_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void mnsListar_Click(object sender, EventArgs e)
         {
             FormListagem form = new FormListagem();
             form.ShowDialog();
+        }
+
+      
+
+        private void mnsSair_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
